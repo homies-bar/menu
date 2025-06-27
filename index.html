@@ -35,30 +35,30 @@
       gap: 1rem;
       padding: 1rem;
     }
+    
+    .controls input, .controls select {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 1rem;
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-family: inherit;
+    }
+    
     .controls select {
       -webkit-appearance: none;  /* Safari & iOS */
       -moz-appearance: none;     /* Firefox */
       appearance: none;          /* Modern browsers */
-    
-      background: #f9f9f9;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      font-family: inherit;
     
       /* Custom dropdown arrow */
       background-image: url('data:image/svg+xml;utf8,<svg fill="%23666" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
       background-repeat: no-repeat;
       background-position: right 0.75rem center;
       background-size: 1rem;
-}
-
-    .controls input, .controls select {
-      flex: 1;
-      padding: 0.5rem;
-      font-size: 1rem;
+      padding-right: 2.5rem;
     }
+    
     .container {
       max-width: 900px;
       margin: auto;
@@ -80,6 +80,7 @@
       border-radius: 8px;
       background: #f9f9f9;
     }
+    
     .hidden {
       display: none;
     }
@@ -101,66 +102,3 @@
       <option value="Cocktails">Cocktails</option>
       <option value="VINE & PROSECCO">VINE & PROSECCO</option>
       <option value="Homies Cocktails">Homies Cocktails</option>
-    </select>
-  </div>
-</div>
-<div class="container" id="menu"></div>
-
-<script>
-const items = [
-  { name: "TÜRK KAHVESİ", price: 120, category: "Hot Beverages" },
-  { name: "TÜRK KAHVESİ Double", price: 200, category: "Hot Beverages" },
-  { name: "ESPRESSO SHOT", price: 130, category: "Hot Beverages" },
-  { name: "FLAT WHITE", price: 180, category: "Hot Beverages" },
-  { name: "ICE LATTE", price: 230, category: "Hot Beverages" },
-  { name: "LATTE", price: 180, category: "Hot Beverages" },
-  { name: "KIŞ ÇAYI", price: 100, category: "Hot Beverages" },
-  { name: "YEŞİL ÇAY", price: 100, category: "Hot Beverages" },
-  { name: "KEDİ DİLLİ TİRAMİSU", price: 180, category: "Desserts" },
-  { name: "LİMONLU CHEESECAKE", price: 250, category: "Desserts" },
-  { name: "ÇİKOLATALI PASTA", price: 200, category: "Desserts" },
-  { name: "CARLSBERG FIÇI 50cl", price: 200, category: "Beers" },
-  { name: "CARLSBERG FIÇI 33cl", price: 180, category: "Beers" },
-  { name: "TUBORG FIÇI 50cl", price: 180, category: "Beers" },
-];
-
-function renderMenu() {
-  const container = document.getElementById("menu");
-  container.innerHTML = "";
-  const searchTerm = document.getElementById("search").value.toLowerCase();
-  const selectedCategory = document.getElementById("category").value;
-  const grouped = {};
-
-  items.forEach(item => {
-    if (
-      (selectedCategory === "All" || item.category === selectedCategory) &&
-      item.name.toLowerCase().includes(searchTerm)
-    ) {
-      if (!grouped[item.category]) grouped[item.category] = [];
-      grouped[item.category].push(item);
-    }
-  });
-
-  for (const cat in grouped) {
-    const title = document.createElement("h2");
-    title.textContent = cat;
-    container.appendChild(title);
-
-    const grid = document.createElement("div");
-    grid.className = "menu-grid";
-    grouped[cat].forEach(({ name, price }) => {
-      const div = document.createElement("div");
-      div.className = "item";
-      div.innerHTML = `<h4>${name}</h4><p>₺${price}</p>`;
-      grid.appendChild(div);
-    });
-    container.appendChild(grid);
-  }
-}
-
-document.getElementById("search").addEventListener("input", renderMenu);
-document.getElementById("category").addEventListener("change", renderMenu);
-renderMenu();
-</script>
-</body>
-</html>
